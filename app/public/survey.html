@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Friend Finder Survey</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<script src='https://code.jquery.com/jquery.js'></script>
+</head>
+<body>
+	<div class="container">
+		<h2>Survey Questions</h2>
+		<hr>
+		<h3><strong>About You</strong></h3>
+		<h4>Name</h4>
+		<input type="text" name id="name" class="form-control" required>
+		<h4>Link to Photo</h4>
+		<input type="text" name id="photo" class="form-control" required>
+		<hr>
+		<h3><strong>Question 1</strong></h3>
+		<h4>Your mind is always buzzing with unexplored ideas and plans.</h4>
+		<select class="selection" id="q1">
+			<option value="" selected>Please select</option>
+			<option value="1">1 (Strongly Disagree)</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5 (Strongly Agree)</option>
+		</select>
+		<h3><strong>Question 2</strong></h3>
+		<h4>Generally speaking, you rely more on your experience than your imagination.</h4>
+		<select class="selection" id="q2">
+			<option value="" selected>Please select</option>
+			<option value="1">1 (Strongly Disagree)</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5 (Strongly Agree)</option>
+		</select>
+		<h3><strong>Question 3</strong></h3>
+		<h4>You find it easy to stay relaxed and focused even when there is some pressure.</h4>
+		<select class="selection" id="q3">
+			<option value="" selected>Please select</option>
+			<option value="1">1 (Strongly Disagree)</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5 (Strongly Agree)</option>
+		</select>		
+		<h3><strong>Question 4</strong></h3>
+		<h4>You rarely do something just out of sheer curiosity.</h4>
+		<select class="selection" id="q4">
+			<option value="" selected>Please select</option>
+			<option value="1">1 (Strongly Disagree)</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5 (Strongly Agree)</option>
+		</select>		
+		<h3><strong>Question 5</strong></h3>
+		<h4>People can rarely upset you.</h4>
+		<select class="selection" id="q5">
+			<option value="" selected>Please select</option>
+			<option value="1">1 (Strongly Disagree)</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5 (Strongly Agree)</option>
+		</select>		
+		<h3><strong>Question 6</strong></h3>
+		<h4>It is often difficult for you to relate to other people's feelings.</h4>
+		<select class="selection" id="q6">
+			<option value="" selected>Please select</option>
+			<option value="1">1 (Strongly Disagree)</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5 (Strongly Agree)</option>
+		</select>		
+		<h3><strong>Question 7</strong></h3>
+		<h4>In a discussion, truth should be more important than other people's feelings.</h4>
+		<select class="selection" id="q7">
+			<option value="" selected>Please select</option>
+			<option value="1">1 (Strongly Disagree)</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5 (Strongly Agree)</option>
+		</select>		
+		<h3><strong>Question 8</strong></h3>
+		<h4>You rarely get carried away by fantasies and ideas.</h4>
+		<select class="selection" id="q8">
+			<option value="" selected>Please select</option>
+			<option value="1">1 (Strongly Disagree)</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5 (Strongly Agree)</option>
+		</select>		
+		<h3><strong>Question 9</strong></h3>
+		<h4>You think that everyone's views should be respected regardless of whether they are supported by facts or not.</h4>
+		<select class="selection" id="q9">
+			<option value="" selected>Please select</option>
+			<option value="1">1 (Strongly Disagree)</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5 (Strongly Agree)</option>
+		</select>		
+		<h3><strong>Question 10</strong></h3>
+		<h4>You feel more energetic after spending time with a group of people.</h4>
+		<select class="selection" id="q10">
+			<option value="" selected>Please select</option>
+			<option value="1">1 (Strongly Disagree)</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5 (Strongly Agree)</option>
+		</select>
+		<br><br>
+		<button class="btn btn-primary btn-lg" id="submit">Submit Form</button>		
+	</div>
+	<hr>
+	<footer>
+		<div class="container">
+			<a href="/api/friends">Friends API</a>
+		</div>
+	</footer>
+	<script type="text/javascript">
+	
+	$("#submit").on("click", function(event) {
+		event.preventDefault();
+
+		function validate (){
+			var valid = true;
+			$(".form-control").each(function(){
+				if($(this).val === ""){
+					valid = false;
+				}
+			});
+			$(".selection").each(function(){
+				if($(this).val() === ""){
+					valid = false;
+				}
+			});
+			console.log(valid);
+			return valid;
+		}
+
+		if(validate() === true){
+			var newFriend = {
+				name: $("#name").val(),
+				photo: $("#photo").val(),
+				scores: [$("#q1").val(), $("#q2").val(), $("#q3").val(), $("#q4").val(), $("#q5").val(), $("#q6").val(), $("#q7").val(), $("#q8").val(), $("#q9").val(), $("#q10").val()]
+			}
+
+			$.post("/api/friends", newFriend, function(data){
+				$(".form-control").each(function(){
+					$(this).val("");
+				});
+				$(".selection").each(function(){
+					$(this).val("");
+				});
+			});
+		} else {
+			alert("Please fill out entire form. All fields are required for friend finding.");
+		}
+	});
+
+
+	</script>
+	
+</body>
+</html>

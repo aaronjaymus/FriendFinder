@@ -1,0 +1,31 @@
+{
+  "name": "friendfinder",
+  "version": "0.1.0",
+  "description": "Fill out a short survey and find out who is just like you!",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aaronjaymus/FriendFinder.git"
+  },
+  "keywords": [
+    "friends",
+    "finder",
+    "facebook",
+    "node",
+    "express"
+  ],
+  "author": "A. James McHale",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aaronjaymus/FriendFinder/issues"
+  },
+  "homepage": "https://github.com/aaronjaymus/FriendFinder#readme",
+  "dependencies": {
+    "body-parser": "^1.17.0",
+    "express": "^4.15.0"
+  }
+}
