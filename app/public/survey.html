@@ -17,7 +17,7 @@
 		<hr>
 		<h3><strong>Question 1</strong></h3>
 		<h4>Your mind is always buzzing with unexplored ideas and plans.</h4>
-		<select class="selection" id="q1">
+		<select class="question" id="q1">
 			<option value="" selected>Please select</option>
 			<option value="1">1 (Strongly Disagree)</option>
 			<option value="2">2</option>
@@ -27,7 +27,7 @@
 		</select>
 		<h3><strong>Question 2</strong></h3>
 		<h4>Generally speaking, you rely more on your experience than your imagination.</h4>
-		<select class="selection" id="q2">
+		<select class="question" id="q2">
 			<option value="" selected>Please select</option>
 			<option value="1">1 (Strongly Disagree)</option>
 			<option value="2">2</option>
@@ -37,7 +37,7 @@
 		</select>
 		<h3><strong>Question 3</strong></h3>
 		<h4>You find it easy to stay relaxed and focused even when there is some pressure.</h4>
-		<select class="selection" id="q3">
+		<select class="question" id="q3">
 			<option value="" selected>Please select</option>
 			<option value="1">1 (Strongly Disagree)</option>
 			<option value="2">2</option>
@@ -47,7 +47,7 @@
 		</select>		
 		<h3><strong>Question 4</strong></h3>
 		<h4>You rarely do something just out of sheer curiosity.</h4>
-		<select class="selection" id="q4">
+		<select class="question" id="q4">
 			<option value="" selected>Please select</option>
 			<option value="1">1 (Strongly Disagree)</option>
 			<option value="2">2</option>
@@ -57,7 +57,7 @@
 		</select>		
 		<h3><strong>Question 5</strong></h3>
 		<h4>People can rarely upset you.</h4>
-		<select class="selection" id="q5">
+		<select class="question" id="q5">
 			<option value="" selected>Please select</option>
 			<option value="1">1 (Strongly Disagree)</option>
 			<option value="2">2</option>
@@ -67,7 +67,7 @@
 		</select>		
 		<h3><strong>Question 6</strong></h3>
 		<h4>It is often difficult for you to relate to other people's feelings.</h4>
-		<select class="selection" id="q6">
+		<select class="question" id="q6">
 			<option value="" selected>Please select</option>
 			<option value="1">1 (Strongly Disagree)</option>
 			<option value="2">2</option>
@@ -77,7 +77,7 @@
 		</select>		
 		<h3><strong>Question 7</strong></h3>
 		<h4>In a discussion, truth should be more important than other people's feelings.</h4>
-		<select class="selection" id="q7">
+		<select class="question" id="q7">
 			<option value="" selected>Please select</option>
 			<option value="1">1 (Strongly Disagree)</option>
 			<option value="2">2</option>
@@ -87,7 +87,7 @@
 		</select>		
 		<h3><strong>Question 8</strong></h3>
 		<h4>You rarely get carried away by fantasies and ideas.</h4>
-		<select class="selection" id="q8">
+		<select class="question" id="q8">
 			<option value="" selected>Please select</option>
 			<option value="1">1 (Strongly Disagree)</option>
 			<option value="2">2</option>
@@ -97,7 +97,7 @@
 		</select>		
 		<h3><strong>Question 9</strong></h3>
 		<h4>You think that everyone's views should be respected regardless of whether they are supported by facts or not.</h4>
-		<select class="selection" id="q9">
+		<select class="question" id="q9">
 			<option value="" selected>Please select</option>
 			<option value="1">1 (Strongly Disagree)</option>
 			<option value="2">2</option>
@@ -107,7 +107,7 @@
 		</select>		
 		<h3><strong>Question 10</strong></h3>
 		<h4>You feel more energetic after spending time with a group of people.</h4>
-		<select class="selection" id="q10">
+		<select class="question" id="q10">
 			<option value="" selected>Please select</option>
 			<option value="1">1 (Strongly Disagree)</option>
 			<option value="2">2</option>
@@ -118,6 +118,7 @@
 		<br><br>
 		<button class="btn btn-primary btn-lg" id="submit">Submit Form</button>		
 	</div>
+	<div id="randomTest"></div>
 	<hr>
 	<footer>
 		<div class="container">
@@ -127,7 +128,7 @@
 	<script type="text/javascript">
 	
 	$("#submit").on("click", function(event) {
-		event.preventDefault();
+		//event.preventDefault();
 
 		function validate (){
 			var valid = true;
@@ -136,16 +137,19 @@
 					valid = false;
 				}
 			});
-			$(".selection").each(function(){
+			$(".question").each(function(){
 				if($(this).val() === ""){
 					valid = false;
 				}
 			});
 			console.log(valid);
 			return valid;
+
 		}
 
-		if(validate() === true){
+		var isValid = validate(); 
+
+		if(isValid){
 			var newFriend = {
 				name: $("#name").val(),
 				photo: $("#photo").val(),
@@ -153,12 +157,7 @@
 			}
 
 			$.post("/api/friends", newFriend, function(data){
-				$(".form-control").each(function(){
-					$(this).val("");
-				});
-				$(".selection").each(function(){
-					$(this).val("");
-				});
+				console.log(data);
 			});
 		} else {
 			alert("Please fill out entire form. All fields are required for friend finding.");
