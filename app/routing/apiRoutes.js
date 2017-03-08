@@ -21,7 +21,7 @@ module.exports = function(app) {
 				friendsValue = currentValue;
 				friendFound = friendsData[i];
 			}
-			console.log(JSON.stringify(friendFound));	
+			//console.log(JSON.stringify(friendFound));	
 		}
 		res.json(friendFound);
 		friendsData.push(req.body);

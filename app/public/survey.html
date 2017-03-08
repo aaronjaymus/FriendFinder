@@ -4,6 +4,7 @@
 	<title>Friend Finder Survey</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<script src='https://code.jquery.com/jquery.js'></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </head>
 <body>
 	<div class="container">
@@ -116,15 +117,31 @@
 			<option value="5">5 (Strongly Agree)</option>
 		</select>
 		<br><br>
-		<button class="btn btn-primary btn-lg" id="submit">Submit Form</button>		
+		<button type="button"class="btn btn-primary btn-lg" id="submit">Submit Form</button>		
 	</div>
-	<div id="randomTest"></div>
 	<hr>
 	<footer>
 		<div class="container">
 			<a href="/api/friends">Friends API</a>
 		</div>
 	</footer>
+	<div id="resultsModal" class="modal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3>Your New Friend!</h3>
+				</div>
+				<div class="modal-body">
+					<div id="foundFriendName"></div>
+					<img id="foundFriendPhoto" class="img-responsive" width="15%"></img>
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="closeModal" class="btn btn-default" data-dismiss="modal">Close</button>	
+				</div>
+			</div>
+			
+		</div>
+	</div>	
 	<script type="text/javascript">
 	
 	$("#submit").on("click", function(event) {
@@ -157,12 +174,30 @@
 			}
 
 			$.post("/api/friends", newFriend, function(data){
+				
+				$("#foundFriendName").html("<h4>"+data.name+"</h4>");
+				$("#foundFriendPhoto").attr("src", data.photo);
+
+				$("#resultsModal").modal('toggle');
 				console.log(data);
 			});
 		} else {
 			alert("Please fill out entire form. All fields are required for friend finding.");
 		}
 	});
+
+	$("#closeModal").on("click", function(event){
+		event.preventDefault();
+
+		$(".form-control").each(function(){
+			$(this).val("");
+		});
+		$(".question").each(function(){
+			$(this).prop("selectedIndex", 0);
+		});
+		$("#foundFriendPhoto").empty();
+		$("#foundFriendName").empty();
+	})
 
 
 	</script>
